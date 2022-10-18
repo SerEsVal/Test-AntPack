@@ -1,4 +1,4 @@
-import { CadenaConexion, ConnectionBD } from '../h.function'
+import { ConnectionBD } from '../h.function'
 
 export async function NewUser(req, res) {
 
@@ -24,9 +24,8 @@ export async function NewUser(req, res) {
     var AddressId;
     var CompanyId;
 
-
-    const Conection = CadenaConexion("sv1919");
-    const CnxBD = ConnectionBD(Conection.NomBD, Conection.UserBD, Conection.PwdBD, Conection.HostBD, Conection.Port);
+    // CONNECTION TO DATA BASE (NAME DATA BASE, USER, "PASSWSORD", "HOST", "PORT")
+    const CnxBD = ConnectionBD("", "", "", "", "");
 
     var sql = `SELECT nextval('sq_user');`;
     const Resp0 = await CnxBD.query(sql).catch(err => {
@@ -125,8 +124,8 @@ export async function NewUser(req, res) {
 
 export async function ReadUsers(req, res) {
 
-    const Conection = CadenaConexion("sv1919");
-    const CnxBD = ConnectionBD(Conection.NomBD, Conection.UserBD, Conection.PwdBD, Conection.HostBD, Conection.Port);
+    // CONNECTION TO DATA BASE (NAME DATA BASE, USER, "PASSWSORD", "HOST", "PORT")
+    const CnxBD = ConnectionBD("", "", "", "", "");
 
 
     var sqlUSers = `
@@ -172,8 +171,8 @@ export async function UpdateUser(req, res) {
     var VarCatchphrase = params.Catchphrase
     var VarBs = params.Bs
 
-    const Conection = CadenaConexion("sv1919");
-    const CnxBD = ConnectionBD(Conection.NomBD, Conection.UserBD, Conection.PwdBD, Conection.HostBD, Conection.Port);
+    // CONNECTION TO DATA BASE (NAME DATA BASE, USER, "PASSWSORD", "HOST", "PORT")
+    const CnxBD = ConnectionBD("", "", "", "", "");
 
 
     var sqlUSer = `UPDATE appuser SET name=:paramname, username=:paramusername, email=:paramemail,
@@ -250,8 +249,8 @@ export function DeleteUser(req, res) {
     var VarCompanyId = params.CompanyId
 
 
-    const Conection = CadenaConexion("sv1919");
-    const CnxBD = ConnectionBD(Conection.NomBD, Conection.UserBD, Conection.PwdBD, Conection.HostBD, Conection.Port);
+    // CONNECTION TO DATA BASE (NAME DATA BASE, USER, "PASSWSORD", "HOST", "PORT")
+    const CnxBD = ConnectionBD("", "", "", "", "");
 
     var sql = `
             DELETE FROM address WHERE id=:paramidaddress;

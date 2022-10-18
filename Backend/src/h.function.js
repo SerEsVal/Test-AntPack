@@ -1,45 +1,6 @@
 import Sequelize from 'sequelize';
 import axios from "axios";
 
-// LEER EL ARCHOV .CFG
-export function CadenaConexion(req, res) {
-
-    var fs = require('fs');
-
-    var phcode = req;
-    var path = '//DATASRV/GoPHDocs/AppConx/';
-    var fileName = path + phcode + '.cfg';
-    let data = []
-
-    // Check if the file exists 
-    let fileExists = fs.existsSync(fileName, 'utf8');
-
-    // If the file does not exist 
-    if (!fileExists) {
-        return fileExists;
-    } else {
-        data = fs.readFileSync(fileName, 'utf8');
-
-        // SEPARAR LA CADENA DONDE HAYA UN ';'
-        var datos = data.split(";");
-
-        // PASAR CADA DATO SEPARADO EN UNA VARIABLE
-        var vservidor = datos[0].split('@')[1];
-        var vdatabase = datos[1].split('@')[1];
-        var vusuaraio = datos[2].split('@')[1];
-        var vpassword = datos[3].split('@')[1];
-        var vpuerto = datos[4].split('=')[1];
-
-        // JUNTAR LAS VARIABLES NDEPENDIENTES A UNA CADENA TIPO JSON
-        var jsonString = JSON.stringify({ HostBD: vservidor, NomBD: vdatabase, UserBD: vusuaraio, PwdBD: vpassword, Port: vpuerto })
-
-        // PARSEAR A JSON
-        var Respuesta = JSON.parse(jsonString);
-
-        return Respuesta;
-    }
-};
-
 // CONEXION A LA BASE DE DATOS
 export function ConnectionBD(NomBD, UserBD, PwdBD, HostBD, PortBD) {
     var VarBD = NomBD;
@@ -73,8 +34,7 @@ export function ConnectionBD(NomBD, UserBD, PwdBD, HostBD, PortBD) {
 export async function PlaceHolderUser() {
     axios.get('https://jsonplaceholder.typicode.com/users').then(async (Resp) => {
         // CONNECTION TO DATA BASE (NAME DATA BASE, USER, "PASSWSORD", "HOST", "PORT")
-        const Conection = CadenaConexion("sv1919");
-        const CnxBD = ConnectionBD(Conection.NomBD, Conection.UserBD, Conection.PwdBD, Conection.HostBD, Conection.Port);
+        const CnxBD = ConnectionBD("", "", "", "", "");
 
         /* ELIMINAR REGSITROS PREVIOS PARA VOLVER A LLEVAR LA BASE DE DATOS */
         var sql = `
